@@ -52,8 +52,17 @@ body {
 
 #monthNum {
     font-size: 97px;
+    width: 75%;
 }
 
+#yearDay {
+    position: absolute;
+    right: 12px;
+    top: 44px;
+    width: 170px;
+    height: 118px;
+    font-size: 26px
+}
 .calendarTable {
     font-size: 26px;
 }
@@ -70,6 +79,8 @@ table {
 }
 
 td {
+    vertical-align: top;
+    text-align: left;
     border: 1px solid #fff;
     border-radius: 5px;
 }
