@@ -1,0 +1,14 @@
+{
+  "name": "attendance-system",
+  "version": "1.0.0",
+  "description": "Electron flashcards",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Badtz",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.4.13"
+  }
+}
