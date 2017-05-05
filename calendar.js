@@ -89,3 +89,15 @@ function updateMonth(curMonthNumber) {
     }
     
 };
+function leapYear(){
+    var d = new Date();
+    var result;
+    d = d.getFullYear();
+    if ((d%4 == 0) && (d%100 != 0) || (d%400 == 0)){
+        result = true;
+        console.log("leap year");
+    } else{
+        result = false;
+        console.log("Not leap year");
+    }
+};

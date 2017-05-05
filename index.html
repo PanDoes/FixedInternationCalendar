@@ -10,6 +10,7 @@
     <script>
         var curMonth = 0;
         var monthTitle = 0; // 0 = Number titles, 1 = Month titles "Refer to calendar.js"
+        var leapYear = leapYear();
         function nxtMonth(){
             if (curMonth==12) {
                 curMonth = 0;
@@ -42,17 +43,20 @@
     <div id="title-bar">
         <div id="title">International Fixed Calendar</div>
         <div class="title-bar-btns btns-left">
-            <button id="nxtMonth-btn" onclick="nxtMonth()">R</button>
-            <button id="lstMonth-btn" onclick="lstMonth()">L</button>
+            <button id="nxtMonth-btn" onclick="nxtMonth()">+</button>
+            <button id="lstMonth-btn" onclick="lstMonth()">-</button>
             <button id="swapTitles-btn" onclick="swapTitles()">S</button>
         </div>
         <div class="title-bar-btns btns-right">
-            <button id="min-btn">-</button>
+            <button id="min-btn">_</button>
             <button id="close-btn">x</button>
         </div>
     </div>
     <div id="content">
         <div id="monthNum">Zero Month</div>
+        <div id="specialDates">
+
+        </div>
         <table class="calendarTable">
             <tr class="weekDays">
                 <th class="weekDays">Monday</th>
