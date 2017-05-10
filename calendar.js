@@ -1,5 +1,19 @@
+function leapYear(){
+    var d = new Date();
+    var result;
+    d = d.getFullYear();
+    if ((d%4 == 0) && (d%100 != 0) || (d%400 == 0)){
+        result = true;
+        console.log("leap year");
+    } else{
+        result = false;
+        console.log("Not leap year");
+    }
+    return result;
+};
 function updateMonth(curMonthNumber) {
     var month;
+    document.getElementById('yearDay').style.opacity = 0;
     if (monthTitle == 0){
         switch(curMonthNumber){
             case 0:
@@ -19,6 +33,10 @@ function updateMonth(curMonthNumber) {
                 break;
             case 5:
                 month = "Five";
+                if(leapYear){
+                    document.getElementById('yearDay').style.opacity = 1;
+                    document.getElementById('yearDayName').innerHTML = "Leap Day";
+                }                
                 break;
             case 6:
                 month = "Six";
@@ -40,6 +58,8 @@ function updateMonth(curMonthNumber) {
                 break;
             case 12:
                 month = "Twelve";
+                document.getElementById('yearDay').style.opacity = 1;
+                document.getElementById("yearDayName").innerHTML = "Year Day";
                 break;
         }
         document.getElementById("monthNum").innerHTML = month + " Month";
@@ -62,6 +82,10 @@ function updateMonth(curMonthNumber) {
                 break;
             case 5:
                 month = "June";
+                if(leapYear){
+                    document.getElementById('yearDay').style.opacity = 1;
+                    document.getElementById('yearDayName').innerHTML = "Leap Day";
+                }    
                 break;
             case 6:
                 month = "Sol";
@@ -83,21 +107,11 @@ function updateMonth(curMonthNumber) {
                 break;
             case 12:
                 month = "December";
+                document.getElementById('yearDay').style.opacity = 1;
+                document.getElementById('yearDayName').innerHTML = "Year Day";
                 break;
       }
       document.getElementById("monthNum").innerHTML = month;
     }
     
-};
-function leapYear(){
-    var d = new Date();
-    var result;
-    d = d.getFullYear();
-    if ((d%4 == 0) && (d%100 != 0) || (d%400 == 0)){
-        result = true;
-        console.log("leap year");
-    } else{
-        result = false;
-        console.log("Not leap year");
-    }
 };

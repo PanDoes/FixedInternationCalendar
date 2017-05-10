@@ -61,11 +61,13 @@ body {
     top: 44px;
     width: 170px;
     height: 118px;
-    font-size: 26px
+    font-size: 26px;
+    opacity: 0;
 }
 .calendarTable {
     font-size: 26px;
 }
+
 
 table {
      width: 100%;
@@ -101,6 +103,10 @@ td {
 }
 
 #lstMonth-btn {
+    margin-left: -4px;
+}
+
+#swapTitles-btn {
     margin-left: -4px;
 }
 
