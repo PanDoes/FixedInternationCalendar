@@ -1,7 +1,55 @@
+var curMonth = 0;
+console.log("initialize" + curMonth);
+var monthTitle = 0; // 0 = Number titles, 1 = Month titles "Refer to calendar.js"
+var leapYear = leapYear();
+function nxtMonth(){
+    console.log("nxtMonth Init" + curMonth);
+    if (curMonth==12) {
+        curMonth = 0;
+    } else {
+            curMonth = curMonth+1;
+        }
+        updateMonth(curMonth);
+        console.log("nxtMonth end" + curMonth);
+    }
+function lstMonth(){
+    console.log("lstMonth Init" + curMonth);
+    if (curMonth==0) {
+        curMonth = 12;
+    } else {
+        curMonth = curMonth-1;
+    }
+    updateMonth(curMonth);
+    console.log("lstMonth end" + curMonth);
+}
+function swapTitles(){
+    console.log("swap Init" + curMonth);
+    switch(monthTitle){
+        case 0:
+            monthTitle = 1;
+        break;
+    case 1:
+        monthTitle = 0;
+    }
+    updateMonth(curMonth);
+    console.log("swap end" + curMonth);
+}
+function findToday(){
+    console.log("findToday Init" + curMonth)
+    var d = new Date();
+    var curDay = d.getDate();
+    curMonth = d.getMonth()+1;
+    updateMonth(curMonth);
+    document.getElementById(curDay).style.backgroundColor = 'white';
+    console.log(curDay);
+    console.log(curMonth);
+
+};
 function leapYear(){
     var d = new Date();
     var result;
     d = d.getFullYear();
+    
     if ((d%4 == 0) && (d%100 != 0) || (d%400 == 0)){
         result = true;
         console.log("leap year");
