@@ -2,6 +2,7 @@ var curMonth = 0;
 console.log("initialize" + curMonth);
 var monthTitle = 0; // 0 = Number titles, 1 = Month titles "Refer to calendar.js"
 var leapYear = leapYear();
+var i = 0;
 function nxtMonth(){
     console.log("nxtMonth Init" + curMonth);
     if (curMonth==12) {
@@ -163,3 +164,19 @@ function updateMonth(curMonthNumber) {
     }
     
 };
+function dateConvert(convMonth, convDate){
+    var dayOfYear = 0;
+    monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    for(i = 0; i <= convMonth; i++){
+        dayOfYear += monthDays[i];
+    }
+    dayOfYear += convDate;
+    return dayOfYear;
+}
+function dayOfToMonth(dayOfYear){
+    prize = dayOfYear%28;
+    if(prize>12){
+        prize = 12;
+    }
+    result = prize-1;
+}
