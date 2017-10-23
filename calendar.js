@@ -1,5 +1,4 @@
 var curMonth = 0;
-var curDay = 0;
 console.log("initialize" + curMonth);
 var monthTitle = 0; // 0 = Number titles, 1 = Month titles "Refer to calendar.js"
 var leapYear = leapYear();
@@ -38,23 +37,12 @@ function swapTitles(){
 function findToday(){
     console.log("findToday Init" + curMonth)
     var d = new Date();
-    curDay = d.getDate();
+    var curDay = d.getDate();
     curMonth = d.getMonth()+1;
     updateMonth(curMonth);
     document.getElementById(curDay).style.backgroundColor = 'white';
     console.log(curDay);
     console.log(curMonth);
-};
-//            between 0 - 12    0 - 28
-function checkDate(checkMonth, checkDay){
-    var d = new Date();
-    curMonth = d.getMonth();
-    curDay = d.getDate();
-    if(curMonth == checkMonth && curDay == checkDay){
-        return 1;
-    }else{
-        return 0;
-    }
 
 };
 function leapYear(){
