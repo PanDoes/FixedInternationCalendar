@@ -37,13 +37,24 @@ function swapTitles(){
 function findToday(){
     console.log("findToday Init" + curMonth)
     var d = new Date();
+    var fuckMonths = [31,28,31,30,31,30,31,31,30,31,30,31]
     var curDay = d.getDate();
-    curMonth = d.getMonth()+1;
-    updateMonth(curMonth);
+    var dayOfYear = 0;
+    var x = 0;
+    curMonth = d.getMonth();
+    for (var i = 0; i < curMonth; ++i){
+        dayOfYear += fuckMonths[i];
+    }
+    x = dayOfYear%28;
+    curMonth = (dayOfYear-x)/28;
+    dayOfYear += curDay;
+    curDay = dayOfYear%28;
+    if(curMonth > 5){
+        updateMonth(curMonth+1);
+    }else{
+        updateMonth(curMonth);
+    }
     document.getElementById(curDay).style.backgroundColor = 'white';
-    console.log(curDay);
-    console.log(curMonth);
-
 };
 function leapYear(){
     var d = new Date();
