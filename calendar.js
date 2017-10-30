@@ -1,4 +1,8 @@
 var curMonth = 0;
+var curDay = 0;
+var d = new Date();
+var thisDay = d.getDate();
+var thisMonth = d.getMonth();
 console.log("initialize" + curMonth);
 var monthTitle = 0; // 0 = Number titles, 1 = Month titles "Refer to calendar.js"
 var leapYear = leapYear();
@@ -7,11 +11,11 @@ function nxtMonth(){
     if (curMonth==12) {
         curMonth = 0;
     } else {
-            curMonth = curMonth+1;
-        }
-        updateMonth(curMonth);
-        console.log("nxtMonth end" + curMonth);
+        curMonth = curMonth+1;
     }
+    updateMonth(curMonth);
+    console.log("nxtMonth end" + curMonth);
+}
 function lstMonth(){
     console.log("lstMonth Init" + curMonth);
     if (curMonth==0) {
@@ -35,27 +39,24 @@ function swapTitles(){
     console.log("swap end" + curMonth);
 }
 function findToday(){
-    var d = new Date();
     var fuckMonths = [31,28,31,30,31,30,31,31,30,31,30,31]
-    var curDay = d.getDate();
     var dayOfYear = 0;
     var x = 0;
-    curMonth = d.getMonth();
-    console.log("findToday Init" + curMonth)
-    for (var i = 0; i < curMonth; ++i){
+    console.log("findToday Init" + thisMonth)
+    for (var i = 0; i < thisMonth; ++i){
         dayOfYear += fuckMonths[i];
     }
     x = dayOfYear%28;
-    if(curMonth > 5){
+    if(thisMonth > 5){
         curMonth = ((dayOfYear-x)/28)+1;
+        thisMonth += 1;
     }else{
         curMonth = (dayOfYear-x)/28;
     }
+    dayOfYear += thisDay;
+    thisDay = dayOfYear%28;
+    console.log(thisDay);
     updateMonth(curMonth);
-    dayOfYear += curDay;
-    curDay = dayOfYear%28;
-    console.log(curMonth);
-    document.getElementById(curDay).style.backgroundColor = 'white';
 };
 function leapYear(){
     var d = new Date();
@@ -170,8 +171,15 @@ function updateMonth(curMonthNumber) {
                 document.getElementById('yearDay').style.opacity = 1;
                 document.getElementById('yearDayName').innerHTML = "Year Day";
                 break;
-      }
-      document.getElementById("monthNum").innerHTML = month;
+        }
+        document.getElementById("monthNum").innerHTML = month;
     }
-    
+    //Make sure current day is blue.
+    console.log(curMonth + " " + thisMonth);
+    if(curMonth==thisMonth){
+        console.log("We're in." + thisDay);      
+        document.getElementById(thisDay).style.backgroundColor = '#00bfff';
+    }else{
+        document.getElementById(thisDay).style.backgroundColor = '#333';
+    }
 };
