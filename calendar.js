@@ -35,25 +35,26 @@ function swapTitles(){
     console.log("swap end" + curMonth);
 }
 function findToday(){
-    console.log("findToday Init" + curMonth)
     var d = new Date();
     var fuckMonths = [31,28,31,30,31,30,31,31,30,31,30,31]
     var curDay = d.getDate();
     var dayOfYear = 0;
     var x = 0;
     curMonth = d.getMonth();
+    console.log("findToday Init" + curMonth)
     for (var i = 0; i < curMonth; ++i){
         dayOfYear += fuckMonths[i];
     }
     x = dayOfYear%28;
-    curMonth = (dayOfYear-x)/28;
+    if(curMonth > 5){
+        curMonth = ((dayOfYear-x)/28)+1;
+    }else{
+        curMonth = (dayOfYear-x)/28;
+    }
+    updateMonth(curMonth);
     dayOfYear += curDay;
     curDay = dayOfYear%28;
-    if(curMonth > 5){
-        updateMonth(curMonth+1);
-    }else{
-        updateMonth(curMonth);
-    }
+    console.log(curMonth);
     document.getElementById(curDay).style.backgroundColor = 'white';
 };
 function leapYear(){
