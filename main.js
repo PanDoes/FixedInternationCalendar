@@ -7,6 +7,27 @@ const BrowserWindow = electron.BrowserWindow
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+function createEventWindow() {
+    // Create the event pop-up window.
+    eventWindow = new BrowserWindow({
+        resizable: false,
+        width: 500,
+        height: 500,
+        frame: false,
+    })
+
+    eventWindow.setMenu(null);
+    // Popup HTML page
+    //eventWindow.loadURL(`file://${__dirname}/.html`);
+
+    mainWindow.on('closed', function() {
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        mainWindow = null
+    })
+}
+
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
