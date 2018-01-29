@@ -8,22 +8,25 @@ var fixDay = 0; // Current day of the year (Fixed I.)
 var monthTitle = 0; // 0 = Number titles, 1 = Month titles "Refer to updateMonth function"
 var leapYear = leapYear(); //Checks for a leap year.
 //                  December is left out because we add the days.
-var fuckMonths = [31,28,31,30,31,30,31,31,30,31,30,0] // This is why I hate the Gregorian calendar.
-var dayOfYear = 0; // Day of the year as a number out of 364 (0 - 364)
+var fuckMonths = [31,28,31,30,31,30,31,31,30,31,30,31] // This is why I hate the Gregorian calendar.
+var dayOfYear = 0; // Day of the year as a number out of 365 (1 - 365)
 var x = 0; // Temporary variable
 
 // Possible Names for the months: (Maybe switch to csv?)
 var FixedTitle = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", 1];
 var GregTitle = ["January", "February", "March", "April", "May", "June", "Sol", "July", "August", "September", "October", "November", "December", 0];
 
+console.log("gregMonth = " + gregMonth);
+console.log("gregDay = " + gregDay);
 
 //Get the day of the year as a variable
 function findDayOfYear(){
     dayOfYear = 0;
-    for (var i = 0; i <= gregMonth; ++i){ // Makes dayOfYear equal to the current day of the year (- the days in the current month)
+    for (var i = 0; i < gregMonth; ++i){ // Makes dayOfYear equal to the current day of the year (- the days in the current month)
         dayOfYear += fuckMonths[i];
     }
     dayOfYear += gregDay;
+    console.log("dayOfYear = " + dayOfYear);
     return dayOfYear;
 };
 // Cycle forward through the months
@@ -59,18 +62,15 @@ function swapTitles(){
 };
 
 // Convert the Gregorian day to Fixed I. day
-function findToday(){
+function convertToday(){
     if(dayOfYear == 365){
         //Year Day
     }else if(leapYear && dayOfYear == 60){
         // Leap Year day
     }else{
         fixDay = dayOfYear%28; // Get days into the month
-        dayOfYear -= gregDay; // Subtract days of the month
-        x = dayOfYear%28; // number of days off from Gregorian Calendar
-        fixMonth = ((dayOfYear-x)/28)
-        if(fixMonth >= 6){fixMonth+=1;}// Check if the month 'sol' has passed
-        dayOfYear += gregDay; // Re-add days of the month
+        fixMonth = ((dayOfYear-fixDay)/28)
+        if(fixMonth >= 7){fixMonth+=1;}// Check if the month 'sol' has passed
         updateMonth(fixMonth); // Update current month
     }
 };
