@@ -17,7 +17,7 @@
       if (document.readyState == "complete") {
         init();
         findDayOfYear();
-        findToday();
+        convertToday();
       }
     };
     
