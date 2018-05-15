@@ -46,11 +46,6 @@ button:focus {
 
 .unimportant {
     color: var(--mild-text);
-    font-size: 12px;
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    right: 0;
 }
 
 .card {
@@ -77,12 +72,18 @@ button:focus {
     height: 50px;
     background: var(--background);
     display: grid;
-    grid-template-columns: 280px 31px 31px 60px 1fr 31px 15px;
+    grid-template-columns: 260px 60px 31px 31px 60px 1fr 31px 15px;
     grid-column-gap: 10px;
 }
 
 .month-title {
     font-size: 40px;
+}
+
+#today-button {
+    height: calc(50% + 6px);
+    margin-top: calc(50% - 21px);
+    border-radius: 3px;
 }
 
 .small-button {
@@ -91,10 +92,10 @@ button:focus {
     margin-top: calc(50% - 7px);
 }
 
-#today-button {
-    height: calc(50% + 6px);
-    margin-top: calc(50% - 21px);
-    border-radius: 3px;
+.year-title {
+    font-size: 20px;
+    margin-top: 20%;
+    text-align: center; 
 }
 
 #content-wrapper {
@@ -128,7 +129,6 @@ button:focus {
 @media only screen and (max-width: 1500px) {
     #option-bar {
         grid-column-gap: 5px;
-        grid-template-columns: 260px 31px 31px 60px 1fr 31px 15px;
     }
     #content-wrapper {
         grid-row-gap: 5px;
@@ -153,4 +153,12 @@ button:focus {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     position: relative;
+}
+
+.greg-date {
+    font-size: 12px;
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }

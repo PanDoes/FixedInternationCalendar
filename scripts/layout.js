@@ -1,5 +1,9 @@
 Vue.component('month-title', {
-    template: `<div class="month-title" :id=this.$root.monthId>Month {{ this.$root.monthTitle }}</div>`,
+    template: `<div class="month-title" :id=this.$root.monthId>Month {{ this.$root.monthTitle }}</div>`
+})
+
+Vue.component('year-title', {
+    template: `<div class="year-title unimportant" :id=this.$root.yearDate> {{ this.$root.yearDate }}</div>`
 })
 
 Vue.component('weekday', {
@@ -18,7 +22,7 @@ Vue.component('month-array', {
                 <div v-for="day in 7" :id=day+(week-1)*7 class="day-wrapper boxshadow card">
                     <div class="topbar-wrapper">
                         <div>{{ day + (week-1)*7 }}</div>
-                        <div class="unimportant">{{ $root.convertToGreg($root.monthId, day + (week-1)*7) }}</div>
+                        <div class="greg-date unimportant">{{ $root.convertToGreg($root.monthId, day + (week-1)*7) }}</div>
                     </div>
                 </div>
             </div>
@@ -40,6 +44,7 @@ let index = new Vue({
         gregMonth: 0,
         gregDay: 0,
         dayOfYear: 0,
+        yearDate: 2018,
         gregMonthDays: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
         gregMonthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         monthId: 0,

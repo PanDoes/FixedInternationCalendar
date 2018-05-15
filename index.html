@@ -26,9 +26,10 @@
     <div id="app" class="fixed">
         <div id="option-bar" class="boxshadow">
             <month-title></month-title>
+            <button id="today-button" v-on:click="findToday()">TODAY</button>
             <button class="small-button" v-on:click="shiftMonth(1)">+</button>
             <button class="small-button" v-on:click="shiftMonth(-1)">-</button>
-            <button id="today-button" v-on:click="findToday()">TODAY</button>
+            <year-title></year-title>
             <div></div>
             <button class="small-button" v-on:click="sidebarToggle()">
                 <i style="font-size: 16px" class="fas fa-bars"></i>
