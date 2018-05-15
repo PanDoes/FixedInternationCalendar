@@ -41,10 +41,11 @@ let index = new Vue({
     data: {
         curDay: 0,
         curMonth: 0,
+        gregYear: 0,
         gregMonth: 0,
         gregDay: 0,
         dayOfYear: 0,
-        yearDate: 2018,
+        yearDate: 0,
         gregMonthDays: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
         gregMonthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         monthId: 0,
@@ -54,8 +55,14 @@ let index = new Vue({
     methods: {
         shiftMonth: function (increment) {
             let bmonthId = this.monthId + increment;
-            if (bmonthId == -1) bmonthId = 12;
-            if (bmonthId == 13) bmonthId = 0;
+            if (bmonthId == -1) {
+                bmonthId = 12;
+                this.yearDate -= 1;
+            }
+            if (bmonthId == 13) {
+                bmonthId = 0;
+                this.yearDate += 1;
+            }
 
             let bordColor = "var(--background)"
             if (bmonthId == this.curMonth) bordColor = "var(--main-accent)";
@@ -79,6 +86,7 @@ let index = new Vue({
             document.getElementById(day).style.borderTopColor = "var(--main-accent)";
             this.curDay = day;
             this.curMonth = month;
+            this.yearDate = this.gregYear;
         },
         findDayOfYear: function () {
             this.getGregDates();
@@ -102,6 +110,7 @@ let index = new Vue({
             let d = new Date();
             this.gregMonth = d.getMonth();
             this.gregDay = d.getDate();
+            this.gregYear = d.getFullYear();
         },
         setupPage: function () {
             this.getGregDates();
