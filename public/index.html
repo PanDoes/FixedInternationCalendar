@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Project FIC: Index</title>
+
+  <!-- meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Fun In Cornfields">
+  <meta name="keywords" content="HTML,CSS,JavaScript">
+  <meta name="author" content="Dalton Lange">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="scripts/style.css">
+
+  <!-- scripts -->
+  <!-- VUE -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script defer src="scripts/layout.js"></script>
+
+  <!-- Firebase -->
+  <script defer src="/__/firebase/5.0.4/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/5.0.4/firebase-auth.js"></script>
+  <script defer src="/__/firebase/5.0.4/firebase-database.js"></script>
+  <!-- initialize the SDK after all desired features are loaded "  -->
+  <script defer src="/__/firebase/init.js"></script>
+
+</head>
+
+<body>
+  <div id="app" class="fixed">
+    <div id="option-bar" class="boxshadow">
+      <month-title></month-title>
+      <button id="today-button" v-on:click="findToday()">TODAY</button>
+      <button class="small-button" v-on:click="shiftMonth(-1)">-</button>
+      <button class="small-button" v-on:click="shiftMonth(1)">+</button>
+      <year-title></year-title>
+      <div></div>
+      <login />
+    </div>
+    <div id="content-wrapper" class="fixed">
+      <weekday></weekday>
+      <month-array></month-array>
+    </div>
+  </div>
+</body>
+
+
+
+</html>
