@@ -1,5 +1,5 @@
 Vue.component('month-title', {
-    template: `<div class="month-title" :id=this.$root.ficMonthId>Month {{ this.$root.monthTitle }}</div>`
+    template: `<div class="month-title">Month {{ this.$root.monthTitle }}</div>`
 })
 
 Vue.component('year-title', {
@@ -52,7 +52,7 @@ let index = new Vue({
     data: {
         currentUser: null,
         userToken: null,
-        currentDay: 0,
+        currentDay: 1,
         currentMonth: 0,
         displayYearDay: false,
         isLeapYear: false,
@@ -71,16 +71,17 @@ let index = new Vue({
         shiftMonth: function (increment) {
             let temp_ficMonthId = this.ficMonthId + increment;
 
-            if (temp_ficMonthId == -1) {
-                temp_ficMonthId = 12;
+            while(temp_ficMonthId <= -1) {
+                temp_ficMonthId += 13;
                 this.yearDate -= 1;
                 this.checkLeapYear(this.yearDate);
             }
-            if (temp_ficMonthId == 13) {
-                temp_ficMonthId = 0;
+            while(temp_ficMonthId >= 13) {
+                temp_ficMonthId -= 13;
                 this.yearDate += 1;
                 this.checkLeapYear(this.yearDate);
             }
+            
 
             this.highlightCurrentDay(temp_ficMonthId);
             this.displayYearDay = false;
@@ -90,8 +91,9 @@ let index = new Vue({
             this.monthTitle = this.fixedTitle[temp_ficMonthId];
         },
         highlightCurrentDay: function (monthToCheck) {
-            let bordColor = "var(--background)"
+            let bordColor = "var(--background)";
             if (monthToCheck == this.currentMonth && this.yearDate == this.gregorianYear) bordColor = "var(--main-accent)";
+            
             document.getElementById(this.currentDay).style.borderTopColor = bordColor;
         },
         checkLeapYear: function (yearToCheck) {
@@ -108,27 +110,27 @@ let index = new Vue({
         sidebarToggle: function () {
             console.log("open sidebar");
         },
-        findToday: function () {
-            this.findDayOfYear();
-
-            let calc_day = this.dayOfYear % 28;
-            let calc_month = ((this.dayOfYear - calc_day) / 28);
-            if (calc_month >= 7) calc_month += 1; // Check if the month 'sol' has passed
-
-            // Assign our variables
-            this.ficMonthId = calc_month;
-            this.monthTitle = this.fixedTitle[this.ficMonthId];
-            document.getElementById(calc_day).style.borderTopColor = "var(--main-accent)";
-            this.currentDay = calc_day;
-            this.currentMonth = calc_month;
-            this.yearDate = this.gregorianYear;
+        shiftToToday: function () {
+            this.checkLeapYear(this.gregorianYear);
+            this.getDayOfYear();
+            
+            this.shiftMonth(this.currentMonthToMonth(this.currentMonth, this.gregorianYear));
+            // this.yearDate = this.gregorianYear;
         },
-        findDayOfYear: function () {
+        currentMonthToMonth: function(endingMonth, endingYear) {
+            let calc_currentMonth = this.ficMonthId;
+            let calc_currentYear = this.yearDate;
+            
+            return (endingMonth - calc_currentMonth) + (endingYear - calc_currentYear)*13;
+        },
+        getDayOfYear: function () {
             this.getGregDates();
             let calc_dayOfYear = 0;
             for (let i = 0; i < this.gregorianMonth; ++i) calc_dayOfYear += this.daysInGregorianMonth[i];
             calc_dayOfYear += this.gregorianDay;
 
+            this.currentDay = calc_dayOfYear % 28;
+            this.currentMonth = ((calc_dayOfYear - (calc_dayOfYear % 28)) / 28);
             this.dayOfYear = calc_dayOfYear;
         },
         convertToGreg: function (ficMonth, ficDay) {
@@ -156,11 +158,13 @@ let index = new Vue({
             this.gregorianMonth = d.getMonth();
             this.gregorianDay = d.getDate();
             this.gregorianYear = d.getFullYear();
+            console.log("Day: " + this.gregorianDay + " Month: " + this.gregorianMonth + " Year: " + this.gregorianYear);
         },
         setupPage: function () {
             this.getGregDates();
-            this.findToday();
-            this.checkLeapYear();
+            this.yearDate = this.gregorianYear;
+            this.checkLeapYear(this.yearDate);
+            this.shiftToToday();
         },
         googleLogin: function () {
             let provider = new firebase.auth.GoogleAuthProvider();
