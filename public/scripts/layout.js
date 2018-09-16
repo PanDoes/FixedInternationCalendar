@@ -9,7 +9,10 @@ Vue.component('year-title', {
 Vue.component('login', {
     template: `
         <button v-if="$root.currentUser == null" v-on:click="$root.googleLogin()">LOGIN</button>
-        <button v-else>{{ $root.currentUser.displayName }}</button>
+        <div v-else id="login-container">
+            <div class="unimportant" id="login-name">{{ $root.currentUser.displayName }}</div>
+            <img :src=$root.currentUser.photoURL id="login-image">
+        </div>
     `
 })
 

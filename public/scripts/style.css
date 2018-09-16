@@ -98,6 +98,22 @@ button:focus {
     text-align: center;
 }
 
+#login-container {
+    display: flex;
+}
+
+#login-name {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#login-image {
+    height: 35px;
+    margin-top: 7px;
+    margin-left: 7px;
+    border-radius: 100%;
+}
+
 #content-wrapper {
     margin: 40px 5px 10px;
     width: calc(100% - 10px);
